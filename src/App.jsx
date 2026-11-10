@@ -57,8 +57,8 @@ if (calculation) {
       answer = `Today is ${new Date().toDateString()}`;
     } else if (!answer &&command.includes("how are you")) {
       answer = "I'm doing great. How can I help you?";
-    } else {
-      answer = "I don't know that command yet. We're still teaching me new things.";
+    } else if (!answer) {
+        answer = "I don't know that command yet. We're still teaching me new things.";
     }
 
     setResponse(answer);
