@@ -26,15 +26,36 @@ function App() {
 
     let answer;
 
-    if (command.includes("hello") || command.includes("hi")) {
+    const calculation = command.match(
+  /(-?\d+(?:\.\d+)?)\s*(plus|added to|\+|minus|-|times|multiplied by|\*|divided by|\/)\s*(-?\d+(?:\.\d+)?)/i
+);
+
+if (calculation) {
+  const a = Number(calculation[1]);
+  const operator = calculation[2].toLowerCase();
+  const b = Number(calculation[3]);
+
+  let result;
+
+  if (["plus", "added to", "+"].includes(operator)) result = a + b;
+  else if (["minus", "-"].includes(operator)) result = a - b;
+  else if (["times", "multiplied by", "*"].includes(operator)) result = a * b;
+  else if (["divided by", "/"].includes(operator)) {
+    result = b === 0 ? "undefined because division by zero is not allowed" : a / b;
+  }
+
+  answer = `The answer is ${result}`;
+}
+
+    if (!answer && (command.includes("hello") || command.includes("hi"))) {
       answer = "Hey! Nice to hear from you.";
-    } else if (command.includes("your name")) {
+    } else if (!answer && command.includes("your name")) {
       answer = "I'm Echo, your personal voice assistant.";
-    } else if (command.includes("time")) {
+    } else if (!answer &&command.includes("time")) {
       answer = `The time is ${new Date().toLocaleTimeString()}`;
-    } else if (command.includes("date")) {
+    } else if (!answer &&command.includes("date")) {
       answer = `Today is ${new Date().toDateString()}`;
-    } else if (command.includes("how are you")) {
+    } else if (!answer &&command.includes("how are you")) {
       answer = "I'm doing great. How can I help you?";
     } else {
       answer = "I don't know that command yet. We're still teaching me new things.";
