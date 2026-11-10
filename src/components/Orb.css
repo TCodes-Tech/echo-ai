@@ -1,0 +1,87 @@
+.orb-container {
+  width: 230px;
+  height: 230px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.orb {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    #00e5ff,
+    #6b4dff,
+    #e64cff,
+    #00e5ff
+  );
+  background-size: 300% 300%;
+  animation: rotateColors 6s ease infinite, breathe 3s ease-in-out infinite;
+  box-shadow:
+    0 0 30px #604cff,
+    0 0 70px #604cff,
+    0 0 120px #8b5cf6;
+}
+
+.orb-inner {
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #b5faff, #6744ff 45%, #180d42);
+  filter: blur(2px);
+}
+
+.orb-glow {
+  position: absolute;
+  inset: -25px;
+  border-radius: 50%;
+  border: 2px solid rgba(139, 92, 246, 0.2);
+  animation: ripple 3s ease-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes rotateColors {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Listening */
+.orb-container.listening .orb {
+  animation: breathe 0.8s infinite, rotateColors 2s linear infinite;
+  box-shadow: 0 0 50px #00e5ff, 0 0 120px #00e5ff;
+}
+
+/* Thinking */
+.orb-container.thinking .orb {
+  animation: rotateColors 1.5s linear infinite, breathe 1.5s infinite;
+}
+
+/* Speaking */
+.orb-container.speaking .orb {
+  animation: breathe 0.5s infinite, rotateColors 3s linear infinite;
+  box-shadow: 0 0 50px #e64cff, 0 0 120px #e64cff;
+}

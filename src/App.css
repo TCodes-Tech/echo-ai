@@ -1,0 +1,98 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #050510;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 35px 20px;
+  overflow: hidden;
+}
+
+header {
+  text-align: center;
+}
+
+header h2 {
+  font-size: 28px;
+  letter-spacing: 3px;
+}
+
+header h2 span {
+  color: #8b5cf6;
+}
+
+header p,
+footer {
+  color: #77778f;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.assistant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.assistant h1 {
+  font-size: 28px;
+  margin-top: 35px;
+}
+
+.status {
+  color: #9292aa;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 45px;
+}
+
+.controls button {
+  background: #17172b;
+  border: 1px solid #30304a;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.controls button.active {
+  background: #6638c9;
+  border-color: #a78bfa;
+}
+
+.orb-container {
+  cursor: pointer;
+}
+
+.hint {
+  margin-top: 25px;
+  color: #77778f;
+  font-size: 12px;
+}
+
+.response {
+  margin-top: 15px;
+  color: #c4b5fd;
+  max-width: 350px;
+}
