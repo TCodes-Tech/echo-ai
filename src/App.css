@@ -96,3 +96,19 @@ footer {
   color: #c4b5fd;
   max-width: 350px;
 }
+
+.browser-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 22px;
+  background: #6638c9;
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: 0.3s ease;
+}
+
+.browser-link:hover {
+  background: #8055e8;
+  transform: translateY(-2px);
+}

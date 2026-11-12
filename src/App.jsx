@@ -6,6 +6,7 @@ function App() {
   const [state, setState] = useState("idle");
   const [message, setMessage] = useState("Tap the orb and talk to me.");
   const [response, setResponse] = useState("");
+  const [actionLink, setActionLink] = useState(null);
 
   const recognitionRef = useRef(null);
 
@@ -26,11 +27,59 @@ function App() {
 
     let answer;
 
+    setActionLink(null);
+
+// SEARCH THE WEB
+const searchMatch = command.match(
+  /(?:search(?: the web)? for|look up|google)\s+(.+)/i
+);
+
+if (searchMatch) {
+  const query = searchMatch[1].trim();
+
+  setActionLink({
+    label: `Search Google for "${query}"`,
+    url: `https://www.google.com/search?q=${encodeURIComponent(query)}`
+  });
+
+  answer = `I found a web search for ${query}. Tap the link to view results.`;
+}
+
+// OPEN WEBSITES
+else {
+  const openMatch = command.match(/open\s+(.+)/i);
+
+  if (openMatch) {
+    let site = openMatch[1].trim().toLowerCase();
+
+    const websites = {
+      youtube: "https://www.youtube.com",
+      google: "https://www.google.com",
+      github: "https://github.com",
+      wikipedia: "https://www.wikipedia.org",
+      reddit: "https://www.reddit.com",
+      instagram: "https://www.instagram.com"
+    };
+
+    const url = websites[site] ||
+      (site.includes(".") ? `https://${site}` : null);
+
+    if (url) {
+      setActionLink({
+        label: `Open ${site}`,
+        url
+      });
+
+      answer = `I've prepared ${site} for you. Tap the link to open it.`;
+    }
+  }
+}
+
     const calculation = command.match(
   /(-?\d+(?:\.\d+)?)\s*(plus|added to|\+|minus|-|times|multiplied by|\*|divided by|\/)\s*(-?\d+(?:\.\d+)?)/i
 );
 
-if (calculation) {
+if (!answer &&calculation) {
   const a = Number(calculation[1]);
   const operator = calculation[2].toLowerCase();
   const b = Number(calculation[3]);
@@ -126,6 +175,17 @@ if (calculation) {
         <p className="status">{message}</p>
 
         {response && <p className="response">{response}</p>}
+
+        {actionLink && (
+  <a
+    href={actionLink.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="browser-link"
+  >
+    {actionLink.label} ↗
+  </a>
+)}
 
         <p className="hint">Tap the glowing orb to speak</p>
       </section>
